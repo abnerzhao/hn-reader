@@ -56,12 +56,13 @@
     a { text-decoration: none; }
 
     .shell { width: min(100%, 1180px); margin: 0 auto; padding: 24px 28px 64px; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+    .topbar { display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
     .brand { font-weight: 760; letter-spacing: -.045em; font-size: 21px; }
     .brand i { color: var(--green); font-family: var(--serif); font-weight: 500; }
+    .brand-note { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
     .top-note, .source, .footer, .archive-title { color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 
-    .reader-grid { display: grid; grid-template-columns: 198px minmax(0, 1fr) 110px; gap: 34px; padding: 52px 4.5% 0; align-items: start; }
+    .reader-grid { display: grid; grid-template-columns: 198px minmax(0, 660px) 110px; justify-content: space-between; gap: 24px; padding: 52px 0 0; align-items: start; }
     .archive { position: sticky; top: 20px; align-self: start; }
     .archive-title { margin: 0 0 13px; }
     .archive-list { display: grid; gap: 5px; }
@@ -81,7 +82,8 @@
     .body p { margin: 0 0 1.35em; }
     .body p:first-child::first-letter { float: left; margin: .1em .11em 0 0; color: var(--green); font-size: 3.65em; line-height: .73; }
     .article-transition { animation: reveal .28s ease both; }
-    .footer { margin: 72px 7.5% 0; border-top: 1px solid var(--line); padding-top: 15px; }
+    .footer { margin: 72px 0 0; border-top: 1px solid var(--line); padding-top: 15px; letter-spacing: 0; text-transform: none; }
+    .footer a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
     @keyframes reveal { from { opacity: .25; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 
     @media (max-width: 860px) {
@@ -106,7 +108,10 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="index.html">HN Reader</a>
+      <div>
+        <a class="brand" href="index.html">HN Reader</a>
+        <p class="brand-note">Read Hacker News at your English level.</p>
+      </div>
     </header>
 
     <section class="reader-grid" aria-label="文章阅读器">
@@ -128,7 +133,7 @@
       </nav>
     </section>
 
-    <footer class="footer">Read Hacker News at your English level.</footer>
+    <footer class="footer">Design by <a href="https://abnerzhao.com" target="_blank" rel="noreferrer">Abner Zhao</a></footer>
   </main>
 
   <script src="content/articles/articles.js"></script>
