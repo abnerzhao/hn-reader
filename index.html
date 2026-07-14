@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7f3">
+  <title>HN Reader</title>
+  <link rel="icon" href="hn-reader-favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --paper: #f5f7f3;
+      --panel: #fbfcfa;
+      --ink: #17221d;
+      --muted: #69746d;
+      --line: #dce2db;
+      --green: #165b43;
+      --green-soft: #e4f0e9;
+      --serif: Iowan Old Style, Baskerville, "Times New Roman", "Noto Serif SC", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    button, a { color: inherit; font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; }
+
+    .shell { width: min(100%, 1180px); margin: 0 auto; padding: 24px 28px 64px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+    .brand { font-weight: 760; letter-spacing: -.045em; font-size: 21px; }
+    .brand i { color: var(--green); font-family: var(--serif); font-weight: 500; }
+    .top-note, .source, .footer, .archive-title { color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+
+    .reader-grid { display: grid; grid-template-columns: 198px minmax(0, 1fr) 110px; gap: 34px; padding: 52px 4.5% 0; align-items: start; }
+    .archive { position: sticky; top: 20px; align-self: start; }
+    .archive-title { margin: 0 0 13px; }
+    .archive-list { display: grid; gap: 5px; }
+    .archive-item { display: block; width: 100%; border: 0; border-left: 2px solid transparent; background: transparent; padding: 11px 10px 12px; text-align: left; transition: background .16s ease, border-color .16s ease; }
+    .archive-item:hover { background: #edf1ec; }
+    .archive-item[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); }
+    .archive-date { display: block; margin-bottom: 5px; color: var(--green); font: 10px/1.3 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+    .archive-name { display: block; color: var(--ink); font: 15px/1.2 var(--serif); }
+    .levels { position: sticky; top: 20px; display: grid; gap: 5px; align-self: start; }
+    .levels-title { margin: 0 0 8px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .level { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; border-left: 2px solid transparent; background: transparent; color: var(--muted); padding: 10px 8px; text-align: left; transition: color .16s ease, background .16s ease; }
+    .level:hover { background: #edf1ec; color: var(--ink); }
+    .level[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); font-weight: 730; }
+    .level span:last-child { font: 10px var(--mono); }
+    .source { margin: 32px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+    .source a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+    .body { color: #27332d; font: 19px/1.82 var(--serif); }
+    .body p { margin: 0 0 1.35em; }
+    .body p:first-child::first-letter { float: left; margin: .1em .11em 0 0; color: var(--green); font-size: 3.65em; line-height: .73; }
+    .article-transition { animation: reveal .28s ease both; }
+    .footer { margin: 72px 7.5% 0; border-top: 1px solid var(--line); padding-top: 15px; }
+    @keyframes reveal { from { opacity: .25; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 860px) {
+      .reader-grid { grid-template-columns: 1fr; gap: 26px; padding: 38px 0 0; }
+      .archive { position: static; }
+      .archive-list { grid-template-columns: minmax(190px, 260px); overflow-x: auto; padding-bottom: 2px; }
+      .levels { position: static; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+      .levels-title { grid-column: 1 / -1; }
+      .level { min-height: 58px; border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+      .level[aria-pressed="true"] { border-color: var(--green); }
+      .footer { margin: 52px 0 0; }
+    }
+    @media (max-width: 520px) {
+      .shell { padding: 18px 18px 44px; }
+      .top-note { display: none; }
+      .levels { grid-template-columns: 1fr; }
+      .level { min-height: 42px; }
+      .body { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">HN Reader</a>
+    </header>
+
+    <section class="reader-grid" aria-label="文章阅读器">
+      <aside class="archive" aria-label="历史文章">
+        <p class="archive-title">Archive</p>
+        <div class="archive-list" id="archiveList"></div>
+      </aside>
+
+      <article class="article-transition" id="article" aria-live="polite">
+        <div class="body" id="articleBody"></div>
+        <p class="source">Source: <a id="sourceLink" href="https://substack.magazinenongrata.com/p/how-i-learned-to-read-again" target="_blank" rel="noreferrer">Magazine Non Grata ↗</a></p>
+      </article>
+
+      <nav class="levels" aria-label="阅读难度">
+        <p class="levels-title">Choose a level</p>
+        <button class="level" type="button" data-level="easy" aria-pressed="true"><span>Easy</span><span>01</span></button>
+        <button class="level" type="button" data-level="medium" aria-pressed="false"><span>Medium</span><span>02</span></button>
+        <button class="level" type="button" data-level="hard" aria-pressed="false"><span>Hard</span><span>03</span></button>
+      </nav>
+    </section>
+
+    <footer class="footer">Read Hacker News at your English level.</footer>
+  </main>
+
+  <script src="content/articles.js"></script>
+  <script>
+    const articles = window.HN_READER_ARTICLES;
+    const levelButtons = document.querySelectorAll('[data-level]');
+    const archiveList = document.getElementById('archiveList');
+    const article = document.getElementById('article');
+    const sourceLink = document.getElementById('sourceLink');
+    let activeArticle = Object.keys(articles)[0];
+    let activeLevel = 'easy';
+
+    const renderArticle = () => {
+      const story = articles[activeArticle];
+      const edition = story.editions[activeLevel];
+      sourceLink.href = story.sourceUrl;
+      sourceLink.textContent = `${story.sourceName} ↗`;
+      document.getElementById('articleBody').innerHTML = edition.paragraphs.map(text => `<p>${text}</p>`).join('');
+      levelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.level === activeLevel)));
+      archiveList.querySelectorAll('[data-article]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.article === activeArticle)));
+      article.classList.remove('article-transition');
+      void article.offsetWidth;
+      article.classList.add('article-transition');
+    };
+
+    levelButtons.forEach(button => button.addEventListener('click', () => {
+      activeLevel = button.dataset.level;
+      renderArticle();
+    }));
+    archiveList.innerHTML = Object.entries(articles).map(([id, story]) => `<button class="archive-item" type="button" data-article="${id}" aria-pressed="false"><span class="archive-date">${new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${story.date}T00:00:00Z`))}</span><span class="archive-name">${story.title}</span></button>`).join('');
+    archiveList.addEventListener('click', event => {
+      const button = event.target.closest('[data-article]');
+      if (!button) return;
+      activeArticle = button.dataset.article;
+      article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      renderArticle();
+    });
+    renderArticle();
+  </script>
+</body>
+</html>
