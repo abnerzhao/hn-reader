@@ -8,19 +8,19 @@ window.HN_READER_ARTICLES = {
     "editions": {
       "easy": {
         "paragraphs": [
-          "AI can answer questions and make decisions very quickly. This is useful, but it can also make us stop thinking for ourselves. The writer asks where help from AI ends and dependence begins.",
+          "AI can answer questions and make decisions very quickly. This is useful, but it can also make us stop thinking for ourselves. I keep asking where help from AI ends and dependence begins.",
           "Some tasks are good to give to AI, such as translation, routine research, or repetitive work. But important questions need our own ideas first. When we let AI choose everything for us, we may lose practice in making choices and forming opinions.",
-          "The writer suggests a simple habit: think before you ask. Make guesses, discuss ideas, and then use AI to test or add to your thinking. AI should help us learn and decide, not replace our judgment."
+          "I try to think before I ask. Make guesses, discuss ideas, and then use AI to test or add to your thinking. AI should help us learn and decide, not replace our judgment."
         ]
       },
       "medium": {
         "paragraphs": [
           "AI makes it easy to hand over more of our thinking. It can research, reason, and give a finished answer in minutes. That convenience can be useful, but it also removes the intermediate work of breaking down a question, comparing sources, and forming an answer.",
-          "The writer describes a person who records every conversation and lets an AI system summarize and analyze them all. He believes the system is better at critical thinking than he is. This is an extreme example, but it raises a broader question: who makes the final decisions that matter in our lives?",
-          "There is value in slow thinking. On a phone-free walk, the writer notices questions that would normally be searched immediately. Most are forgotten, while the few important ones remain. Not every thought needs an instant answer.",
-          "While travelling, the writer and her sister discussed a question about Portuguese colonial history before asking AI. They offered theories, disagreed, remembered details, and accepted that some guesses could be wrong. Only after that did they use AI to test and extend their ideas.",
+          "At a startup event, my friend met a man who records every conversation and lets an AI system summarize and analyze them all. He believes the system is better at critical thinking than he is. This raises a broader question: who makes the final decisions that matter in our lives?",
+          "There is value in slow thinking. On phone-free walks, questions come to my mind that I would normally search immediately. Most are forgotten, while the few important ones remain. Not every thought needs an instant answer.",
+          "While travelling in Portugal, my sister and I discussed colonial history before asking AI. We offered theories, disagreed, remembered details, and accepted that some guesses could be wrong. Only after that did we use AI to test and extend our ideas.",
           "AI can make work and learning more efficient. It can translate reports, support research, and help students study. Yet it can also produce polished answers without teaching someone how to solve a problem. The same tool can support learning or replace it.",
-          "The goal is not complete independence from AI. It is to keep human agency in the process: choosing the questions, providing judgment, and deciding what matters. We should ask whether we are automating routine tasks or automating our ability to think and choose."
+          "The goal is not complete independence from AI. It is to keep human agency in the process: choosing the questions, providing judgment, and deciding what matters. We should ask whether we are automating routine tasks or our ability to think and choose."
         ]
       },
       "hard": {
@@ -53,18 +53,18 @@ window.HN_READER_ARTICLES = {
     "editions": {
       "easy": {
         "paragraphs": [
-          "AI can help people make things faster. But making more things does not mean that people will use them. Many builders stay busy with AI tools and avoid asking a simple question: does anyone really need this?",
+          "AI can help us make things faster. But making more things does not mean that people will use them. If we stay busy with AI tools and never ask real users what they need, we are avoiding the real question.",
           "The hard part of building a company has not disappeared. You still need to talk to real users, take risks, show your work in public, and accept rejection. AI cannot do these things for you.",
-          "The writer says that AI can become an escape. It can make you feel productive while you avoid the work that matters. In the end, progress comes from looking honestly at reality and changing course when something is not working."
+          "AI can become an escape. It can make us feel productive while we avoid the work that matters. Progress comes from looking honestly at reality and changing course when something is not working."
         ]
       },
       "medium": {
         "paragraphs": [
-          "AI gives builders a choice. They can use it to produce a large number of projects very quickly, or they can use it to remove early technical work and return to the real problem sooner. The danger is confusing fast output with useful progress.",
+          "AI gives us a choice. We can use it to produce a large number of projects very quickly, or use it to remove early technical work and return to the real problem sooner. The danger is confusing fast output with useful progress.",
           "Many founders keep building for months without speaking to a real user. AI makes this easier to hide because it can produce code, copy, and prototypes so quickly. But coding speed was rarely the main obstacle to a successful company.",
           "The difficult parts remain human. They include taking personal risks, putting your name on something, facing rejection, and continuing when other people do not believe in you. These are the tasks that create lasting value, and AI has not made them easy.",
-          "The writer warns that AI can become a comfortable bubble. An agent may encourage every idea while nobody outside that bubble needs the result. The better use of AI is to move faster toward evidence, not to avoid it.",
-          "In the AI era, the advantage belongs to people who keep looking for the truth. They test their assumptions, speak to users, and face reality even when the answer is uncomfortable."
+          "AI can become a comfortable bubble. An agent may encourage every idea while nobody outside that bubble needs the result. The better use of AI is to move faster toward evidence, not to avoid it.",
+          "In the AI era, the advantage belongs to those of us who keep looking for the truth. We test our assumptions, speak to users, and face reality even when the answer is uncomfortable."
         ]
       },
       "hard": {
@@ -126,23 +126,23 @@ window.HN_READER_ARTICLES = {
     "editions": {
       "easy": {
         "paragraphs": [
-          "A good tool should not ask for much attention. It should help you do your work, then disappear into the background.",
-          "Some people call a tool difficult because its problems are fun puzzles. The writer disagrees. A text editor should make editing easy. If a simple task takes too long, the tool is getting in the way.",
-          "Tools can become part of our identity. Then we may defend their problems instead of asking if they really help us. The best tool is the one that lets you finish your work without thinking about the tool itself."
+          "A good tool should not ask for much attention. I want it to help me do my work, then disappear into the background.",
+          "Some people call a tool difficult because its problems are fun puzzles. I do not want that. A text editor should make editing easy. If a simple task takes too long, the tool is getting in the way.",
+          "Tools can become part of our identity. Then we defend their problems instead of asking if they really help us. The best tool is the one that lets us finish our work without thinking about the tool itself."
         ]
       },
       "medium": {
         "paragraphs": [
-          "A good tool should be invisible. It should make work easier without demanding attention for itself. The writer argues that toolmakers should aim for this feeling, rather than treating a tool’s limitations as entertaining puzzles.",
-          "Text editor debates are a clear example. Some people praise a complicated macro because it feels clever to build. But if the same task takes a minute with multiple cursors or a small script, the difficulty is not a feature. It is friction.",
-          "Tool choices can also become part of a person’s identity. Once that happens, admitting a tool has flaws can feel personal. Users may defend those flaws instead of measuring real productivity by time, output, and mistakes.",
-          "The writer is not arguing for one editor, interface, or operating system. The point is to choose what helps you work. Good defaults respect the user’s time, and advanced options should exist for unusual needs, not replace good design for everyone."
+          "A good tool should be invisible. It should make work easier without demanding attention for itself. I want to make tools like that, not turn their limitations into entertaining puzzles.",
+          "Text editor debates are a clear example. Some people praise a complicated macro because it feels clever to build. But if I can do the same task in a minute with multiple cursors or a small script, the difficulty is not a feature. It is friction.",
+          "Tool choices can also become part of a person’s identity. Once that happens, admitting a tool has flaws can feel personal. We may defend those flaws instead of measuring real productivity by time, output, and mistakes.",
+          "I am not arguing for one editor, interface, or operating system. Choose what helps you work. Good defaults respect the user’s time, and advanced options should exist for unusual needs, not replace good design for everyone."
         ]
       },
       "hard": {
         "paragraphs": [
           "A good tool is and ought to be invisible. The goal of a toolmaker is not to create a puzzle game around a tool’s shortcomings, but to make the tool disappear into the background so that the user can get on with the work.",
-          "The author uses text editor culture as an example. A one-off macro may feel satisfying to construct, but that feeling can conceal a poor tradeoff. If multiple cursors or a quick script achieve the same result faster and with clearer feedback, then the friction was not evidence of power.",
+          "I use text editor culture as an example. A one-off macro may feel satisfying to construct, but that feeling can conceal a poor tradeoff. If multiple cursors or a quick script achieve the same result faster and with clearer feedback, then the friction was not evidence of power.",
           "These debates become strangely religious when a tool choice becomes an identity. The hacker vibe is not merely aesthetic; it is tribal signaling. Once someone’s identity is invested in a tool, its limitations are easier to celebrate than to acknowledge.",
           "The real distinction is between feeling productive and being productive. The honest test is wall-clock time and the number of mistakes made, not the sensation of cleverness produced by overcoming a difficult workflow.",
           "Good defaults are a form of respect for the user’s time. Configurability should be an escape hatch for genuine exceptions, not an excuse for declining to make decisions. The best tool is not the one with the best story. It is the one you forget you are using."

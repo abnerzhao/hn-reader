@@ -7,23 +7,23 @@ source_url: https://adi.bio/reality
 
 ## easy
 
-AI can help people make things faster. But making more things does not mean that people will use them. Many builders stay busy with AI tools and avoid asking a simple question: does anyone really need this?
+AI can help us make things faster. But making more things does not mean that people will use them. If we stay busy with AI tools and never ask real users what they need, we are avoiding the real question.
 
 The hard part of building a company has not disappeared. You still need to talk to real users, take risks, show your work in public, and accept rejection. AI cannot do these things for you.
 
-The writer says that AI can become an escape. It can make you feel productive while you avoid the work that matters. In the end, progress comes from looking honestly at reality and changing course when something is not working.
+AI can become an escape. It can make us feel productive while we avoid the work that matters. Progress comes from looking honestly at reality and changing course when something is not working.
 
 ## medium
 
-AI gives builders a choice. They can use it to produce a large number of projects very quickly, or they can use it to remove early technical work and return to the real problem sooner. The danger is confusing fast output with useful progress.
+AI gives us a choice. We can use it to produce a large number of projects very quickly, or use it to remove early technical work and return to the real problem sooner. The danger is confusing fast output with useful progress.
 
 Many founders keep building for months without speaking to a real user. AI makes this easier to hide because it can produce code, copy, and prototypes so quickly. But coding speed was rarely the main obstacle to a successful company.
 
 The difficult parts remain human. They include taking personal risks, putting your name on something, facing rejection, and continuing when other people do not believe in you. These are the tasks that create lasting value, and AI has not made them easy.
 
-The writer warns that AI can become a comfortable bubble. An agent may encourage every idea while nobody outside that bubble needs the result. The better use of AI is to move faster toward evidence, not to avoid it.
+AI can become a comfortable bubble. An agent may encourage every idea while nobody outside that bubble needs the result. The better use of AI is to move faster toward evidence, not to avoid it.
 
-In the AI era, the advantage belongs to people who keep looking for the truth. They test their assumptions, speak to users, and face reality even when the answer is uncomfortable.
+In the AI era, the advantage belongs to those of us who keep looking for the truth. We test our assumptions, speak to users, and face reality even when the answer is uncomfortable.
 
 ## hard
 
