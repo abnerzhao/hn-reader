@@ -62,20 +62,30 @@
     .brand-note { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
     .top-note, .source, .footer, .archive-title { color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 
-    .reader-grid { display: grid; grid-template-columns: 198px minmax(0, 660px) 110px; justify-content: space-between; gap: 24px; padding: 52px 0 0; align-items: start; }
-    .archive { position: sticky; top: 20px; align-self: start; }
+    .reader-grid { display: grid; grid-template-columns: 230px minmax(0, 660px) 110px; justify-content: space-between; gap: 24px; padding: 52px 0 0; align-items: start; }
+    .archive { position: sticky; top: 20px; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: calc(100dvh - 40px); min-height: 0; align-self: start; }
     .archive-title { margin: 0 0 13px; }
-    .archive-list { display: grid; gap: 5px; }
-    .archive-item { display: block; width: 100%; border: 0; border-left: 2px solid transparent; background: transparent; padding: 11px 10px 12px; text-align: left; transition: background .16s ease, border-color .16s ease; }
+    .archive-list { display: grid; gap: 18px; min-height: 0; overflow-y: auto; padding-right: 6px; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+    .archive-list::-webkit-scrollbar { width: 5px; }
+    .archive-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
+    .archive-group { display: grid; gap: 3px; }
+    .archive-month { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: transparent; margin: 0 0 4px; padding: 2px 4px 2px 0; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .07em; text-align: left; text-transform: uppercase; }
+    .archive-month:hover { color: var(--ink); }
+    .archive-month::after { content: '+'; font-size: 15px; font-weight: 400; line-height: 1; }
+    .archive-month[aria-expanded="true"]::after { content: '−'; }
+    .archive-items { display: grid; gap: 5px; }
+    .archive-items[hidden] { display: none; }
+    .archive-item { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: start; gap: 10px; width: 100%; border: 0; border-left: 2px solid transparent; background: transparent; padding: 12px 10px 13px; text-align: left; transition: background .16s ease, border-color .16s ease; }
     .archive-item:hover { background: #edf1ec; }
     .archive-item[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); }
-    .archive-date { display: block; margin-bottom: 6px; color: #436655; font: 600 12px/1.3 var(--mono); letter-spacing: .02em; text-transform: uppercase; }
-    .archive-name { display: block; color: var(--ink); font: 15px/1.2 var(--serif); }
+    .archive-date { display: block; padding-top: 3px; color: #436655; font: 600 12px/1.3 var(--mono); letter-spacing: .02em; }
+    .archive-name { display: block; color: var(--ink); font: 16px/1.38 var(--serif); }
     .levels { position: sticky; top: 20px; display: grid; gap: 5px; align-self: start; }
     .levels-title { margin: 0 0 8px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .level { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 46px; border: 0; border-left: 2px solid transparent; background: transparent; color: var(--muted); padding: 0 12px; font-size: 15px; font-weight: 600; line-height: 1.25; text-align: left; transition: color .16s ease, background .16s ease; }
     .level:hover { background: #edf1ec; color: var(--ink); }
     .level[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); font-weight: 730; }
+    .reading-meta { margin: 0 0 20px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
     .source { margin: 32px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
     .source a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
     .body { color: #27332d; font: 19px/1.82 var(--serif); }
@@ -88,8 +98,8 @@
 
     @media (max-width: 860px) {
       .reader-grid { grid-template-columns: 1fr; gap: 26px; padding: 38px 0 0; }
-      .archive { position: static; }
-      .archive-list { grid-template-columns: minmax(190px, 260px); overflow-x: auto; padding-bottom: 2px; }
+      .archive { position: static; display: block; max-height: none; }
+      .archive-list { grid-template-columns: repeat(12, minmax(220px, 280px)); gap: 12px; overflow-x: auto; overflow-y: visible; padding: 0 0 2px; }
       .levels { position: static; grid-template-columns: repeat(3, 1fr); gap: 7px; }
       .levels-title { grid-column: 1 / -1; }
       .level { min-height: 58px; border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
@@ -121,6 +131,7 @@
       </aside>
 
       <article class="article-transition" id="article" aria-live="polite">
+        <p class="reading-meta" id="readingMeta"></p>
         <div class="body" id="articleBody"></div>
         <p class="source">Source: <a id="sourceLink" href="https://substack.magazinenongrata.com/p/how-i-learned-to-read-again" target="_blank" rel="noreferrer">Magazine Non Grata ↗</a></p>
       </article>
@@ -143,14 +154,18 @@
     const archiveList = document.getElementById('archiveList');
     const article = document.getElementById('article');
     const sourceLink = document.getElementById('sourceLink');
+    const readingMeta = document.getElementById('readingMeta');
     let activeArticle = Object.keys(articles)[0];
     let activeLevel = 'easy';
 
     const renderArticle = () => {
       const story = articles[activeArticle];
       const edition = story.editions[activeLevel];
+      const wordCount = edition.paragraphs.join(' ').trim().split(/\s+/).filter(Boolean).length;
+      const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
       sourceLink.href = story.sourceUrl;
       sourceLink.textContent = `${story.sourceName} ↗`;
+      readingMeta.textContent = `${wordCount} words · ${readingMinutes} min read`;
       document.getElementById('articleBody').innerHTML = edition.paragraphs.map(text => `<p>${text}</p>`).join('');
       levelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.level === activeLevel)));
       archiveList.querySelectorAll('[data-article]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.article === activeArticle)));
@@ -163,8 +178,28 @@
       activeLevel = button.dataset.level;
       renderArticle();
     }));
-    archiveList.innerHTML = Object.entries(articles).map(([id, story]) => `<button class="archive-item" type="button" data-article="${id}" aria-pressed="false"><span class="archive-date">${new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${story.date}T00:00:00Z`))}</span><span class="archive-name">${story.title}</span></button>`).join('');
+    const articleEntries = Object.entries(articles);
+    const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    const archiveGroups = articleEntries.reduce((groups, [id, story]) => {
+      const date = new Date(`${story.date}T00:00:00Z`);
+      const month = monthFormatter.format(date);
+      (groups[month] ??= []).push([id, story, date]);
+      return groups;
+    }, {});
+    archiveList.innerHTML = Object.entries(archiveGroups).map(([month, entries], index) => {
+      const monthId = `archive-month-${index}`;
+      const isExpanded = index === 0;
+      return `<section class="archive-group"><button class="archive-month" type="button" data-month-toggle aria-expanded="${isExpanded}" aria-controls="${monthId}">${month}</button><div class="archive-items" id="${monthId}"${isExpanded ? '' : ' hidden'}>${entries.map(([id, story, date]) => `<button class="archive-item" type="button" data-article="${id}" aria-pressed="false"><span class="archive-date">${String(date.getUTCDate()).padStart(2, '0')}</span><span class="archive-name">${story.title}</span></button>`).join('')}</div></section>`;
+    }).join('');
     archiveList.addEventListener('click', event => {
+      const monthToggle = event.target.closest('[data-month-toggle]');
+      if (monthToggle) {
+        const content = document.getElementById(monthToggle.getAttribute('aria-controls'));
+        const isExpanded = monthToggle.getAttribute('aria-expanded') === 'true';
+        monthToggle.setAttribute('aria-expanded', String(!isExpanded));
+        content.hidden = isExpanded;
+        return;
+      }
       const button = event.target.closest('[data-article]');
       if (!button) return;
       activeArticle = button.dataset.article;
