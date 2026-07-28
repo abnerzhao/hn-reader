@@ -73,6 +73,19 @@ node scripts/build-hn-reader.mjs
 
 `OPENAI_API_KEY` 仅用于自动生成 Easy 和 Medium。Hard 会保留原始正文；发布前请人工检查生成内容。
 
+## 自动发布
+
+GitHub Actions 每天北京时间 09:10 从 Hacker News Top Stories 中挑选一篇未收录的外链文章。流程会排除 API 文档、SDK 教程、发布说明及狭窄的实现类文章，优先选择 AI 与技术领域的思考、趋势、产品、文化或社会影响等有观点的内容。
+
+脚本提取正文后通过 OpenRouter 生成 Easy、Medium、Hard 三个版本，并自动提交文章和前端数据。
+
+在仓库 `Settings → Secrets and variables → Actions` 配置：
+
+- `OPENROUTER_API_KEY`：Repository secret，必填。
+- `OPENROUTER_MODEL`：Repository variable，可选。默认 `openai/gpt-4.1-mini`；所选模型需要支持结构化输出。
+
+可在 Actions 页面手动运行 `Publish daily HN reading`。自动生成内容仍建议在公开前审核。
+
 ## 内容说明
 
 Hacker News 提供的是链接与元数据，文章正文版权属于原始发布者。请保留来源链接、遵守原站条款，并在公开前审核改写内容。

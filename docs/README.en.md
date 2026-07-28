@@ -73,6 +73,19 @@ node scripts/build-hn-reader.mjs
 
 `OPENAI_API_KEY` is only needed to generate Easy and Medium. Hard keeps the source text. Review generated content before publishing.
 
+## Automated publishing
+
+GitHub Actions runs at 09:10 China Standard Time each day. It selects an unread external article from Hacker News Top Stories, excluding API documentation, SDK tutorials, release notes, and narrowly implementation-focused posts. It prioritizes thoughtful AI and technology stories about trends, products, culture, social impact, or original viewpoints.
+
+The workflow extracts readable text, uses OpenRouter to generate Easy, Medium, and Hard editions, then commits the article and browser data.
+
+Configure these values in `Settings → Secrets and variables → Actions`:
+
+- `OPENROUTER_API_KEY`: required repository secret.
+- `OPENROUTER_MODEL`: optional repository variable. The default is `openai/gpt-4.1-mini`; the selected model must support structured outputs.
+
+You can also manually run `Publish daily HN reading` from the Actions tab. Review generated content before publishing it publicly.
+
 ## Content note
 
 Hacker News supplies links and metadata, while article text belongs to the original publisher. Keep source links, respect source-site terms, and review adaptations before publishing them.

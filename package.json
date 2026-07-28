@@ -1,0 +1,13 @@
+{
+  "name": "hn-reader",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:articles": "node scripts/build-hn-reader.mjs",
+    "publish:daily": "node scripts/publish-hn-daily.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.6.0",
+    "jsdom": "^27.0.0"
+  }
+}

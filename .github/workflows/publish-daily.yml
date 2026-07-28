@@ -1,0 +1,43 @@
+name: Publish daily HN reading
+
+on:
+  schedule:
+    - cron: '10 1 * * *'
+  workflow_dispatch:
+    inputs:
+      publish_date:
+        description: '发布日期（YYYY-MM-DD），留空则使用当天 UTC 日期'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate daily article
+        run: |
+          if [ -n "${{ inputs.publish_date }}" ]; then
+            npm run publish:daily -- --date "${{ inputs.publish_date }}"
+          else
+            npm run publish:daily
+          fi
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+      - run: npm run build:articles
+      - name: Commit generated article
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/articles
+          git diff --cached --quiet || git commit -m "自动发布每日 HN 阅读文章"
+          git push
