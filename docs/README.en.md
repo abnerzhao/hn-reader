@@ -75,14 +75,14 @@ node scripts/build-hn-reader.mjs
 
 ## Automated publishing
 
-GitHub Actions runs at 09:10 China Standard Time each day. It selects an unread external article from Hacker News Top Stories, excluding API documentation, SDK tutorials, release notes, and narrowly implementation-focused posts. It prioritizes thoughtful AI and technology stories about trends, products, culture, social impact, or original viewpoints.
+GitHub Actions runs at 09:10 China Standard Time each day. It selects an unread external article from Hacker News Top Stories, excluding arXiv and academic papers, API documentation, SDK tutorials, release notes, and narrowly implementation-focused posts. It prioritizes personal experience, observations, and original viewpoints about AI and technology.
 
 The workflow extracts readable text, uses OpenRouter to generate Easy, Medium, and Hard editions, then commits the article and browser data.
 
 Configure these values in `Settings → Secrets and variables → Actions`:
 
 - `OPENROUTER_API_KEY`: required repository secret.
-- `OPENROUTER_MODEL`: optional repository variable. The default is `openai/gpt-4.1-mini`; the selected model must support structured outputs.
+- `OPENROUTER_MODEL`: optional repository variable. When unset, it uses the free `openrouter/free` router; the selected model must support structured outputs.
 
 You can also manually run `Publish daily HN reading` from the Actions tab. Review generated content before publishing it publicly.
 

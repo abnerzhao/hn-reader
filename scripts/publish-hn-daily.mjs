@@ -8,7 +8,7 @@ const articlesDir = join(root, 'content/articles');
 const hnApi = 'https://hacker-news.firebaseio.com/v0';
 const dateIndex = process.argv.indexOf('--date');
 const date = dateIndex >= 0 ? process.argv[dateIndex + 1] : new Date().toISOString().slice(0, 10);
-const model = process.env.OPENROUTER_MODEL || 'openai/gpt-4.1-mini';
+const model = process.env.OPENROUTER_MODEL || 'openrouter/free';
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Use --date YYYY-MM-DD');
 
@@ -47,7 +47,7 @@ async function existingSources() {
 
 function isTechnicalDocumentation(story) {
   const text = `${story.title} ${story.url}`.toLowerCase();
-  return /\b(api|sdk|rfc|documentation|docs|reference|tutorial|how to|quickstart|release notes|changelog|specification|benchmark|github)\b/.test(text);
+  return /\b(api|sdk|rfc|documentation|docs|reference|tutorial|how to|quickstart|release notes|changelog|specification|benchmark|github|arxiv|paper|preprint|journal)\b/.test(text);
 }
 
 async function extractArticle(url) {
@@ -92,7 +92,7 @@ async function openRouterJson(prompt, schemaName, schema) {
 async function chooseStory(candidates) {
   const list = candidates.map((candidate, index) => `${index}. ${candidate.story.title}\n${candidate.extracted.text.slice(0, 700)}`).join('\n\n');
   const result = await openRouterJson(
-    `Choose one article for an English reading site. Select a thoughtful, accessible piece about AI or technology: its social effects, work, products, culture, philosophy, history, or a novel technical viewpoint. Reject API docs, SDK/tutorial/reference material, release notes, product announcements, company press, and narrowly implementation-focused posts. Return the best candidate index.\n\nCandidates:\n${list}`,
+    `Choose one article for an English reading site. The goal is to read interesting, thoughtful work by individual authors found on Hacker News. Strongly prefer independent blogs, essays, and first-person writing with a clear personal voice, lived experience, observation, or original argument. Good themes include AI and technology in work, products, culture, learning, philosophy, history, and social life. A distinctive individual perspective is more important than newsworthiness or technical novelty. Reject papers, arXiv, academic research, API docs, SDK/tutorial/reference material, release notes, product announcements, company press, news reporting, and narrowly implementation-focused posts. Return the best candidate index.\n\nCandidates:\n${list}`,
     'daily_hn_selection',
     { type: 'object', properties: { index: { type: 'integer', minimum: 0, maximum: 7 } }, required: ['index'], additionalProperties: false }
   );
@@ -113,7 +113,7 @@ const editionSchema = {
 
 async function createEditions(title, text) {
   const result = await openRouterJson(
-    `Create three graded English reading editions from this article. Preserve its facts, claims, examples, and narrative voice. Do not describe the author or say "the writer" or "the article". Do not add facts, headings, notes, or citations.\n\nEasy: 3-5 short B1 paragraphs, 120-220 words.\nMedium: 4-7 natural B2 paragraphs, 250-450 words.\nHard: 5-10 source-faithful C1 paragraphs, 550-900 words. It must be a close adaptation, not a summary.\n\nTitle: ${title}\n\nSource text:\n${text}`,
+    `Create three graded English reading editions from this article. Preserve its facts, claims, examples, and narrative voice. Do not describe the author or say "the writer" or "the article". Do not add facts, headings, notes, or citations.\n\nEasy: 3-4 very short A2-B1 paragraphs, 90-150 words total. Use common everyday words only. Keep sentences to 12 words or fewer whenever possible. Avoid idioms, abstract nouns, long clauses, jargon, and uncommon verbs. If a technical idea is essential, explain it in plain English.\nMedium: 4-7 natural B2 paragraphs, 250-450 words.\nHard: 5-10 source-faithful C1 paragraphs, 550-900 words. It must be a close adaptation, not a summary.\n\nTitle: ${title}\n\nSource text:\n${text}`,
     'graded_editions',
     editionSchema
   );
