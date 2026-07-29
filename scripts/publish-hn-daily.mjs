@@ -2,6 +2,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
 import { Readability } from '@mozilla/readability';
 import { JSDOM } from 'jsdom';
+import { requestOpenRouterJson } from './openrouter-json.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const articlesDir = join(root, 'content/articles');
@@ -68,25 +69,13 @@ async function extractArticle(url) {
 }
 
 async function openRouterJson(prompt, schemaName, schema) {
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://github.com/abnerzhao/hn-reader',
-      'X-Title': 'HN Reader'
-    },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      response_format: { type: 'json_schema', json_schema: { name: schemaName, strict: true, schema } }
-    })
+  return requestOpenRouterJson({
+    apiKey: process.env.OPENROUTER_API_KEY,
+    model,
+    prompt,
+    schemaName,
+    schema
   });
-  const result = await response.json();
-  if (!response.ok) throw new Error(`OpenRouter request failed: ${response.status} ${result.error?.message || JSON.stringify(result)}`);
-  const content = result.choices?.[0]?.message?.content;
-  if (typeof content !== 'string') throw new Error('OpenRouter returned no text content');
-  return JSON.parse(content);
 }
 
 async function chooseStory(candidates) {
