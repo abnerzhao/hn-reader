@@ -24,6 +24,28 @@ function clean(value) {
   return value.replace(/\s+/g, ' ').trim();
 }
 
+function limitWords(paragraphs, limit) {
+  let remaining = limit;
+  const result = [];
+  for (const paragraph of paragraphs) {
+    if (!remaining) break;
+    const sentences = paragraph.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [paragraph];
+    const kept = [];
+    for (const sentence of sentences) {
+      const words = clean(sentence).split(/\s+/).filter(Boolean);
+      if (words.length > remaining) {
+        if (!kept.length && remaining) kept.push(`${words.slice(0, remaining).join(' ')}.`);
+        remaining = 0;
+        break;
+      }
+      kept.push(clean(sentence));
+      remaining -= words.length;
+    }
+    if (kept.length) result.push(kept.join(' '));
+  }
+  return result;
+}
+
 function slugify(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
 }
@@ -90,7 +112,7 @@ async function chooseStory(candidates) {
 }
 
 const levelRequirements = {
-  easy: '3-4 very short A2-B1 paragraphs, 90-150 words total. Use common everyday words only. Keep sentences to 12 words or fewer whenever possible. Avoid idioms, abstract nouns, long clauses, jargon, and uncommon verbs. If a technical idea is essential, explain it in plain English.',
+  easy: '3-4 very short A2-B1 paragraphs, 80-120 words total. Never exceed 120 words. Use common everyday words only. Keep sentences to 12 words or fewer whenever possible. Avoid idioms, abstract nouns, long clauses, jargon, and uncommon verbs. If a technical idea is essential, explain it in plain English.',
   medium: '4-7 natural B2 paragraphs, 250-450 words.',
   hard: '5-10 source-faithful C1 paragraphs, 550-900 words. It must be a close adaptation, not a summary.'
 };
@@ -109,7 +131,8 @@ async function createEdition(level, title, text) {
   if (!Array.isArray(result.paragraphs) || result.paragraphs.some(item => typeof item !== 'string' || !clean(item))) {
     throw new Error(`OpenRouter response has invalid ${level} content`);
   }
-  return result.paragraphs.map(clean);
+  const paragraphs = result.paragraphs.map(clean);
+  return level === 'easy' ? limitWords(paragraphs, 120) : paragraphs;
 }
 
 async function createEditions(title, text) {

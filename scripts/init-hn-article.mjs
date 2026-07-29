@@ -37,7 +37,7 @@ if (!metadata.title || !metadata.source) throw new Error('Source frontmatter nee
 const sourceUrl = metadata.source;
 const hard = body.split(/\n{2,}/).map(paragraph => paragraph.replace(/\n/g, ' ').trim()).filter(Boolean);
 
-const prompt = `Rewrite the source article into two graded English editions. Preserve every central claim and do not add facts. Return JSON only: {"easy":["paragraph"],"medium":["paragraph"]}. Easy: 3-5 short paragraphs, common B1 vocabulary and short sentences. Medium: 4-7 paragraphs, natural B2 English with some original nuance. Do not include headings, notes, markdown, or commentary.\n\nTitle: ${metadata.title}\n\nSource text:\n${hard.join('\n\n')}`;
+const prompt = `Rewrite the source article into two graded English editions. Preserve every central claim and do not add facts. Return JSON only: {"easy":["paragraph"],"medium":["paragraph"]}. Easy: 3-5 short paragraphs, 80-120 words total and never more than 120 words, with common B1 vocabulary and short sentences. Medium: 4-7 paragraphs, natural B2 English with some original nuance. Do not include headings, notes, markdown, or commentary.\n\nTitle: ${metadata.title}\n\nSource text:\n${hard.join('\n\n')}`;
 const response = await fetch('https://api.openai.com/v1/responses', {
   method: 'POST',
   headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
