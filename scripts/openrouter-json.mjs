@@ -5,7 +5,11 @@ function wait(milliseconds) {
 function parseContent(content) {
   if (typeof content !== 'string') throw new Error('OpenRouter returned no text content');
   const json = content.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '');
-  return JSON.parse(json);
+  try {
+    return JSON.parse(json);
+  } catch {
+    return JSON.parse(jsonrepair(json));
+  }
 }
 
 export async function requestOpenRouterJson({ apiKey, model, prompt, schemaName, schema, fetchImpl = fetch, retries = 3 }) {
@@ -40,3 +44,4 @@ export async function requestOpenRouterJson({ apiKey, model, prompt, schemaName,
 
   throw new Error(`OpenRouter did not return valid structured JSON after ${retries} attempts: ${lastError.message}`);
 }
+import { jsonrepair } from 'jsonrepair';

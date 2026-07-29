@@ -89,29 +89,33 @@ async function chooseStory(candidates) {
   return candidates[result.index];
 }
 
-const editionSchema = {
-  type: 'object',
-  properties: {
-    easy: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 5 },
-    medium: { type: 'array', items: { type: 'string' }, minItems: 4, maxItems: 7 },
-    hard: { type: 'array', items: { type: 'string' }, minItems: 5, maxItems: 10 }
-  },
-  required: ['easy', 'medium', 'hard'],
-  additionalProperties: false
+const levelRequirements = {
+  easy: '3-4 very short A2-B1 paragraphs, 90-150 words total. Use common everyday words only. Keep sentences to 12 words or fewer whenever possible. Avoid idioms, abstract nouns, long clauses, jargon, and uncommon verbs. If a technical idea is essential, explain it in plain English.',
+  medium: '4-7 natural B2 paragraphs, 250-450 words.',
+  hard: '5-10 source-faithful C1 paragraphs, 550-900 words. It must be a close adaptation, not a summary.'
 };
 
-async function createEditions(title, text) {
+async function createEdition(level, title, text) {
   const result = await openRouterJson(
-    `Create three graded English reading editions from this article. Preserve its facts, claims, examples, and narrative voice. Do not describe the author or say "the writer" or "the article". Do not add facts, headings, notes, or citations.\n\nEasy: 3-4 very short A2-B1 paragraphs, 90-150 words total. Use common everyday words only. Keep sentences to 12 words or fewer whenever possible. Avoid idioms, abstract nouns, long clauses, jargon, and uncommon verbs. If a technical idea is essential, explain it in plain English.\nMedium: 4-7 natural B2 paragraphs, 250-450 words.\nHard: 5-10 source-faithful C1 paragraphs, 550-900 words. It must be a close adaptation, not a summary.\n\nTitle: ${title}\n\nSource text:\n${text}`,
-    'graded_editions',
-    editionSchema
-  );
-  for (const level of ['easy', 'medium', 'hard']) {
-    if (!Array.isArray(result[level]) || result[level].some(item => typeof item !== 'string' || !clean(item))) {
-      throw new Error(`OpenRouter response has invalid ${level} content`);
+    `Create only the ${level} English reading edition from this article. Preserve its facts, claims, examples, and narrative voice. Do not describe the author or say "the writer" or "the article". Do not add facts, headings, notes, or citations.\n\n${levelRequirements[level]}\n\nTitle: ${title}\n\nSource text:\n${text}`,
+    `${level}_edition`,
+    {
+      type: 'object',
+      properties: { paragraphs: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 10 } },
+      required: ['paragraphs'],
+      additionalProperties: false
     }
+  );
+  if (!Array.isArray(result.paragraphs) || result.paragraphs.some(item => typeof item !== 'string' || !clean(item))) {
+    throw new Error(`OpenRouter response has invalid ${level} content`);
   }
-  return Object.fromEntries(Object.entries(result).map(([level, items]) => [level, items.map(clean)]));
+  return result.paragraphs.map(clean);
+}
+
+async function createEditions(title, text) {
+  const editions = {};
+  for (const level of ['easy', 'medium', 'hard']) editions[level] = await createEdition(level, title, text);
+  return editions;
 }
 
 function toMarkdown({ title, url, sourceName, editions }) {
