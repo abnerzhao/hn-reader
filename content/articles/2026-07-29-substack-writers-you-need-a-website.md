@@ -1,0 +1,44 @@
+---
+title: Substack writers, you need a website!
+date: 2026-07-29
+source_name: elizabethtai.com
+source_url: https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/
+---
+
+## easy
+
+Do you use Substack to write? Many writers think Substack is their home. But Substack is just a tool to share your work. It is not a permanent place for your writing. If you only use Substack, you do not own your content.
+
+Large companies own Substack. They can change their rules at any time. This can make your work disappear. You should own your own website and your own domain name. This makes your writing safe for a long time.
+
+You can still use Substack to find new readers. Use it to send your stories to people. But always post your main work on your own website first. This is the safest way to grow your writing online.
+
+## medium
+
+"But I already have a website on Substack," you might say. No, Substack is merely a distribution tool that amplifies your site; it should not become your digital home. In recent years many writers have moved their presence entirely onto Substack, treating it as their main address. When a custom domain is linked to Substack it works like a basic content‑management system, though it lacks the SEO control and page‑customisation options of fuller platforms. Still, if you own the domain and point it to Substack you gain a reasonable, low‑cost setup—until the platform changes its terms without warning.
+
+The lure of convenience repeats every few years. First it was Facebook, then Tumblr, then Medium, now Substack. Each promises an eager audience, built‑in monetisation, a smooth interface and a supportive community, making it tempting to hand over the keys to your creative kingdom. I have fallen for this myself, abandoning a high‑traffic domain for years before returning in 2012. The truth unchanged since the web’s birth is clear: when you build an audience on someone else’s land you are a tenant, or worse a digital sharecropper, and corporate landlords will eventually rewrite the rules to suit their business.
+
+Feeling safe on a platform’s golden era is an illusion. We have watched Twitter’s decline, Reddit’s policy shifts, and the ever‑changing tides of algorithmic networks. Relying blindly on a centrally owned portal means your life’s work can vanish overnight because a boardroom decision pleases investors. I realised I needed a space that would not disappear “poof” when a company chased profit, which led me to protect my content by learning to blog the IndieWeb way. Your writing deserves a permanent homebase—a domain you own and control.
+
+The objection “my website has no audience” misses the point. You need not abandon Substack or other platforms; you only need to change the order of operations. Publish on your own site, then syndicate elsewhere (POSSE). Treat your website as the definitive source of truth and use platforms as simple distribution pipes. I have seen this work in practice, letting me share thoughts freely without dancing to algorithms. John Scalzi exemplifies the approach: for 28 years he has maintained https://whatever.scalzi.com/, using it as his institutional memory while treating X or Bluesky as amplifiers that always lead back to his own domain.
+
+Platform hype fades quickly. After a year on Substack I observed real network effects but also pressure to conform to the ecosystem’s favoured narratives, which marginalises voices outside the US‑centric mainstream. Algorithmic complacency pushes everyone into homogenised bubbles, making it hard for minority or localized writers to be seen unless they adapt. The antidote to exhaustion is not chasing the next shiny app but anchoring your work on an independent site with open channels like RSS, using platforms solely to bring readers back to your house. Stop digital sharecropping on rented land; let your website be the true home of your writing.
+
+## hard
+
+But I already have a website on Substack, you argue. No, no, Substack is just a distribution tool to amplify your website; it should not be your digital home. In the last few years, a pattern has emerged where writers abandon their personal websites to make Substack their primary digital home. While it is acceptable if they have purchased a custom domain and linked it to the platform, Substack then functions merely as a limited content management system. Compared to other CMS options, it is highly restrictive regarding SEO management and page customization. While it offers a fuss-free and cost-efficient experience, the current conditions for domains could change on a dime without warning.
+
+There are writers who tell their readers to head over to Substack and ignore their existing websites. Even those who maintain a website often merely link to their Substacks, calling them their 'blogs.' If your Substack uses a domain that you actually own, it is acceptable, but if it relies on the xx.substack.com format, the platform is effectively saying, 'All your content belongs to us.' To do this is short-sighted and unwise; it is a move that can derail your long-term visibility on the Internet.
+
+Every few years, the internet convinces writers that a new digital paradise has arrived. First, it was social media like Facebook, then blogging networks like Tumblr, then Medium, and most recently, Substack. These platforms promise eager audiences, built-in monetization, a smooth user interface, and a supportive community. As a writer who just wants to focus on writing, it is incredibly tempting to hand over the keys to our creative kingdoms and let these portals handle everything. I once gave in myself, stopping my blogging entirely and even abandoning a high-traffic domain, but I returned in 2012 and never left.
+
+The truth remains unchanged since the dawn of the Internet: when you build your audience entirely on someone else's platform, you aren't a homeowner; you are a tenant, or worse, a digital sharecropper. Corporate landlords always change the rules eventually. It is not personal; it is just business. It is easy to feel secure when a platform is in its golden era, but we have witnessed the downfalls of Twitter, the policy shifts of Reddit, and the changing tides of algorithmic networks. Relying blindly on a centralized portal owned by others means your life's work can alter overnight based entirely on a corporate boardroom decision.
+
+When looking at how fragile digital ecosystems really are, one realizes that a space can disappear simply because a company needs to please its investors or shareholders. Your writing needs a permanent homebase—a domain that you own and control. You do not have to completely abandon platforms like Substack to protect your autonomy; you just need to change the order of operations. Instead of publishing directly to a portal, you should shift your mindset to POSSE: Publish (on your) Own Site, Syndicate Elsewhere. By treating your website as the definitive source of truth and using platforms simply as distribution pipes, you get the best of both worlds.
+
+If you believe Substack is different from the social platforms that came before it, consider the numbers and behaviors behind the marketing. The network effects are real, but so is the pressure to conform to what the platform's ecosystem favors. When you hand your content over to a platform, you must conform to its rules and localized biases. For those writing outside dominant US-centric echo chambers, algorithms heavily prioritize specific Western narratives, making it incredibly tough for localized or minority voices to be seen unless they conform. Algorithmic complacency forces us into homogenized bubbles.
+
+Each time a new drama emerges on a platform and writers declare they will leave for yet another platform they do not control, I think of writers like John Scalzi. He has been blogging on his own website for 28 years, maintaining a single independent website continuously for nearly three decades. This makes him one of the longest-running, most consistent original bloggers on the internet, possessing a digital footprint unbroken by time or platforms. He treats his social media channels as a way to amplify his website, ensuring that all roads lead back to his own domain, which acts as his institutional memory and official record.
+
+Trying to adapt your presence across various platforms in an ever-shifting digital landscape is exhausting. One minute a platform is a writer's darling; the next, it is being boycotted. Railing against a platform's focus shift is a useless endeavor, as tech will change and corporate algorithms will continue to prioritize profit over human connection. The antidote to this exhaustion isn't moving to the next shiny new app; it is anchoring your work on an independent website with open distribution channels like RSS. Use platforms to find your readers, but bring them back to your house. It is time to stop digital sharecropping on rented land.
