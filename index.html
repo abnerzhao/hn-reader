@@ -22,16 +22,9 @@
       font-display: swap;
     }
     @font-face {
-      font-family: "Source Serif 4";
-      src: url("assets/fonts/source-serif-4-400.ttf") format("truetype");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Source Serif 4";
-      src: url("assets/fonts/source-serif-4-600.ttf") format("truetype");
-      font-weight: 600;
+      font-family: "Literata";
+      src: url("assets/fonts/literata-variable.ttf") format("truetype");
+      font-weight: 200 900;
       font-style: normal;
       font-display: swap;
     }
@@ -43,7 +36,7 @@
       --line: #dce2db;
       --green: #165b43;
       --green-soft: #e4f0e9;
-      --serif: "Source Serif 4", Iowan Old Style, Baskerville, "Times New Roman", "Noto Serif SC", serif;
+      --serif: "Literata", Iowan Old Style, Baskerville, "Times New Roman", "Noto Serif SC", serif;
       --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
       --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
@@ -62,31 +55,30 @@
     .brand-note { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
     .top-note, .source, .footer, .archive-title { color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 
-    .reader-grid { display: grid; grid-template-columns: 230px minmax(0, 660px) 110px; justify-content: space-between; gap: 24px; padding: 52px 0 0; align-items: start; }
-    .archive { position: sticky; top: 20px; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: calc(100dvh - 40px); min-height: 0; align-self: start; }
+    .reader-grid { display: grid; grid-template-columns: 250px minmax(0, 640px) 110px; justify-content: space-between; gap: 24px; padding: 52px 0 0; align-items: start; }
+    .archive { position: sticky; top: 20px; align-self: start; }
     .archive-title { margin: 0 0 13px; }
-    .archive-list { display: grid; gap: 18px; min-height: 0; overflow-y: auto; padding-right: 6px; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-    .archive-list::-webkit-scrollbar { width: 5px; }
-    .archive-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
-    .archive-group { display: grid; gap: 3px; }
-    .archive-month { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: transparent; margin: 0 0 4px; padding: 2px 4px 2px 0; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .07em; text-align: left; text-transform: uppercase; }
-    .archive-month:hover { color: var(--ink); }
-    .archive-month::after { content: '+'; font-size: 15px; font-weight: 400; line-height: 1; }
-    .archive-month[aria-expanded="true"]::after { content: '−'; }
-    .archive-items { display: grid; gap: 5px; }
-    .archive-items[hidden] { display: none; }
-    .archive-item { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: start; gap: 10px; width: 100%; border: 0; border-left: 2px solid transparent; background: transparent; padding: 12px 10px 13px; text-align: left; transition: background .16s ease, border-color .16s ease; }
-    .archive-item:hover { background: #edf1ec; }
-    .archive-item[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); }
-    .archive-date { display: block; padding-top: 3px; color: #436655; font: 600 12px/1.3 var(--mono); letter-spacing: .02em; }
-    .archive-name { display: block; color: var(--ink); font: 16px/1.38 var(--serif); }
+    .calendar { width: 100%; }
+    .calendar-head { display: grid; grid-template-columns: 34px 1fr 34px; align-items: center; margin-bottom: 13px; }
+    .calendar-month { margin: 0; color: var(--ink); font: 600 12px/1.3 var(--mono); letter-spacing: .04em; text-align: center; text-transform: uppercase; }
+    .calendar-nav { width: 34px; height: 34px; border: 0; background: transparent; color: var(--muted); font: 21px/1 var(--serif); }
+    .calendar-nav:hover { color: var(--green); background: var(--green-soft); }
+    .calendar-weekdays, .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .calendar-weekdays { margin-bottom: 6px; color: var(--muted); font: 10px/1.4 var(--mono); letter-spacing: -.04em; text-align: center; }
+    .calendar-day { position: relative; display: grid; min-height: 36px; place-items: center; border: 0; background: transparent; color: var(--ink); font: 13px/1 var(--mono); }
+    .calendar-day:hover { background: #edf1ec; color: var(--green); }
+    .calendar-day[aria-pressed="true"] { background: var(--green-soft); color: var(--green); font-weight: 700; }
+    .calendar-day.has-article::after { content: ''; position: absolute; bottom: 5px; width: 4px; height: 4px; border-radius: 50%; background: var(--green); }
+    .calendar-day[aria-pressed="true"]::after { background: var(--green); }
+    .calendar-day.empty { pointer-events: none; }
     .levels { position: sticky; top: 20px; display: grid; gap: 5px; align-self: start; }
     .levels-title { margin: 0 0 8px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .level { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 46px; border: 0; border-left: 2px solid transparent; background: transparent; color: var(--muted); padding: 0 12px; font-size: 15px; font-weight: 600; line-height: 1.25; text-align: left; transition: color .16s ease, background .16s ease; }
     .level:hover { background: #edf1ec; color: var(--ink); }
     .level[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); font-weight: 730; }
-    .reading-meta { margin: 0 0 20px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
-    .source { margin: 32px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+    .reading-meta { margin: 0 0 11px; color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .article-title { margin: 0 0 30px; color: var(--ink); font: 600 30px/1.32 var(--sans); letter-spacing: -.025em; }
+    .source { margin: 32px 0 0; }
     .source a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
     .body { color: #27332d; font: 19px/1.82 var(--serif); }
     .body p { margin: 0 0 1.35em; }
@@ -98,8 +90,7 @@
 
     @media (max-width: 860px) {
       .reader-grid { grid-template-columns: 1fr; gap: 26px; padding: 38px 0 0; }
-      .archive { position: static; display: block; max-height: none; }
-      .archive-list { grid-template-columns: repeat(12, minmax(220px, 280px)); gap: 12px; overflow-x: auto; overflow-y: visible; padding: 0 0 2px; }
+      .archive { position: static; display: block; max-width: 320px; }
       .levels { position: static; grid-template-columns: repeat(3, 1fr); gap: 7px; }
       .levels-title { grid-column: 1 / -1; }
       .level { min-height: 58px; border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
@@ -112,6 +103,7 @@
       .levels { grid-template-columns: 1fr; }
       .level { min-height: 42px; }
       .body { font-size: 18px; }
+      .article-title { font-size: 25px; line-height: 1.36; }
     }
   </style>
 </head>
@@ -126,12 +118,13 @@
 
     <section class="reader-grid" aria-label="文章阅读器">
       <aside class="archive" aria-label="历史文章">
-        <p class="archive-title">Archive</p>
-        <div class="archive-list" id="archiveList"></div>
+        <p class="archive-title">Calendar</p>
+        <div class="calendar" id="archiveList"></div>
       </aside>
 
       <article class="article-transition" id="article" aria-live="polite">
         <p class="reading-meta" id="readingMeta"></p>
+        <h1 class="article-title" id="articleTitle"></h1>
         <div class="body" id="articleBody"></div>
         <p class="source">Source: <a id="sourceLink" href="https://substack.magazinenongrata.com/p/how-i-learned-to-read-again" target="_blank" rel="noreferrer">Magazine Non Grata ↗</a></p>
       </article>
@@ -155,8 +148,11 @@
     const article = document.getElementById('article');
     const sourceLink = document.getElementById('sourceLink');
     const readingMeta = document.getElementById('readingMeta');
+    const articleTitle = document.getElementById('articleTitle');
     let activeArticle = Object.keys(articles)[0];
     let activeLevel = 'easy';
+    let calendarMonth = new Date(`${articles[activeArticle].date}T00:00:00Z`);
+    const escapeAttribute = value => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     const renderArticle = () => {
       const story = articles[activeArticle];
@@ -166,9 +162,10 @@
       sourceLink.href = story.sourceUrl;
       sourceLink.textContent = `${story.sourceName} ↗`;
       readingMeta.textContent = `${wordCount} words · ${readingMinutes} min read`;
+      articleTitle.textContent = story.title;
       document.getElementById('articleBody').innerHTML = edition.paragraphs.map(text => `<p>${text}</p>`).join('');
       levelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.level === activeLevel)));
-      archiveList.querySelectorAll('[data-article]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.article === activeArticle)));
+      renderCalendar();
       article.classList.remove('article-transition');
       void article.offsetWidth;
       article.classList.add('article-transition');
@@ -178,32 +175,51 @@
       activeLevel = button.dataset.level;
       renderArticle();
     }));
-    const articleEntries = Object.entries(articles);
     const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
-    const archiveGroups = articleEntries.reduce((groups, [id, story]) => {
-      const date = new Date(`${story.date}T00:00:00Z`);
-      const month = monthFormatter.format(date);
-      (groups[month] ??= []).push([id, story, date]);
-      return groups;
-    }, {});
-    archiveList.innerHTML = Object.entries(archiveGroups).map(([month, entries], index) => {
-      const monthId = `archive-month-${index}`;
-      const isExpanded = index === 0;
-      return `<section class="archive-group"><button class="archive-month" type="button" data-month-toggle aria-expanded="${isExpanded}" aria-controls="${monthId}">${month}</button><div class="archive-items" id="${monthId}"${isExpanded ? '' : ' hidden'}>${entries.map(([id, story, date]) => `<button class="archive-item" type="button" data-article="${id}" aria-pressed="false"><span class="archive-date">${String(date.getUTCDate()).padStart(2, '0')}</span><span class="archive-name">${story.title}</span></button>`).join('')}</div></section>`;
-    }).join('');
+    const articleByDate = Object.fromEntries(Object.entries(articles).map(([id, story]) => [story.date, id]));
+    const moveArticleByDays = days => {
+      const activeDate = new Date(`${articles[activeArticle].date}T00:00:00Z`);
+      activeDate.setUTCDate(activeDate.getUTCDate() + days);
+      const date = activeDate.toISOString().slice(0, 10);
+      const id = articleByDate[date];
+      if (!id) return false;
+      activeArticle = id;
+      calendarMonth = new Date(`${articles[activeArticle].date}T00:00:00Z`);
+      renderArticle();
+      requestAnimationFrame(() => archiveList.querySelector(`[data-article="${activeArticle}"]`)?.focus());
+      return true;
+    };
+    const renderCalendar = () => {
+      const year = calendarMonth.getUTCFullYear();
+      const month = calendarMonth.getUTCMonth();
+      const firstDay = (new Date(Date.UTC(year, month, 1)).getUTCDay() + 6) % 7;
+      const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+      const cells = Array.from({ length: firstDay }, () => '<span class="calendar-day empty"></span>');
+      for (let day = 1; day <= daysInMonth; day += 1) {
+        const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const id = articleByDate[date];
+        cells.push(id ? `<button class="calendar-day has-article" type="button" data-article="${id}" aria-label="Read ${escapeAttribute(articles[id].title)}" title="${escapeAttribute(articles[id].title)}" aria-pressed="${id === activeArticle}">${day}</button>` : `<span class="calendar-day empty">${day}</span>`);
+      }
+      archiveList.innerHTML = `<div class="calendar-head"><button class="calendar-nav" type="button" data-calendar-nav="-1" aria-label="Previous month">‹</button><p class="calendar-month">${monthFormatter.format(calendarMonth)}</p><button class="calendar-nav" type="button" data-calendar-nav="1" aria-label="Next month">›</button></div><div class="calendar-weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="calendar-days">${cells.join('')}</div>`;
+    };
     archiveList.addEventListener('click', event => {
-      const monthToggle = event.target.closest('[data-month-toggle]');
-      if (monthToggle) {
-        const content = document.getElementById(monthToggle.getAttribute('aria-controls'));
-        const isExpanded = monthToggle.getAttribute('aria-expanded') === 'true';
-        monthToggle.setAttribute('aria-expanded', String(!isExpanded));
-        content.hidden = isExpanded;
+      const calendarNav = event.target.closest('[data-calendar-nav]');
+      if (calendarNav) {
+        calendarMonth = new Date(Date.UTC(calendarMonth.getUTCFullYear(), calendarMonth.getUTCMonth() + Number(calendarNav.dataset.calendarNav), 1));
+        renderCalendar();
         return;
       }
       const button = event.target.closest('[data-article]');
       if (!button) return;
       activeArticle = button.dataset.article;
+      calendarMonth = new Date(`${articles[activeArticle].date}T00:00:00Z`);
       renderArticle();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.target.matches('input, textarea, select, [contenteditable="true"]')) return;
+      const dayOffset = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[event.key];
+      if (!dayOffset || !moveArticleByDays(dayOffset)) return;
+      event.preventDefault();
     });
     renderArticle();
   </script>
