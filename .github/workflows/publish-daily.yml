@@ -2,7 +2,7 @@ name: Publish daily HN reading
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '17 9 * * *'
       timezone: 'Asia/Shanghai'
   workflow_dispatch:
     inputs:
