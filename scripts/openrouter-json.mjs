@@ -12,7 +12,7 @@ function parseContent(content) {
   }
 }
 
-export async function requestOpenRouterJson({ apiKey, model, prompt, schemaName, schema, fetchImpl = fetch, retries = 3 }) {
+export async function requestOpenRouterJson({ apiKey, model, prompt, schemaName, schema, validate, fetchImpl = fetch, retries = 3 }) {
   let lastError;
 
   for (let attempt = 1; attempt <= retries; attempt += 1) {
@@ -35,13 +35,15 @@ export async function requestOpenRouterJson({ apiKey, model, prompt, schemaName,
       });
       const result = await response.json();
       if (!response.ok) throw new Error(`OpenRouter request failed: ${response.status} ${result.error?.message || JSON.stringify(result)}`);
-      return parseContent(result.choices?.[0]?.message?.content);
+      const content = parseContent(result.choices?.[0]?.message?.content);
+      if (validate && !validate(content)) throw new Error('OpenRouter returned content that does not match the expected shape');
+      return content;
     } catch (error) {
       lastError = error;
       if (attempt < retries) await wait(attempt * 1_000);
     }
   }
 
-  throw new Error(`OpenRouter did not return valid structured JSON after ${retries} attempts: ${lastError.message}`);
+  throw new Error(`OpenRouter did not return valid structured content after ${retries} attempts: ${lastError.message}`);
 }
 import { jsonrepair } from 'jsonrepair';

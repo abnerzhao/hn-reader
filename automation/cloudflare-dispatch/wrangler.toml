@@ -1,0 +1,13 @@
+name = "hn-reader-dispatch"
+main = "src/index.js"
+compatibility_date = "2026-08-02"
+workers_dev = false
+
+[triggers]
+crons = ["17 1 * * *"]
+
+[vars]
+GITHUB_OWNER = "abnerzhao"
+GITHUB_REPO = "hn-reader"
+GITHUB_WORKFLOW = "publish-daily.yml"
+GITHUB_REF = "main"

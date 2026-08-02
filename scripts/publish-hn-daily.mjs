@@ -90,13 +90,14 @@ async function extractArticle(url) {
   return { title: clean(article.title), text: text.slice(0, 18_000) };
 }
 
-async function openRouterJson(prompt, schemaName, schema) {
+async function openRouterJson(prompt, schemaName, schema, validate) {
   return requestOpenRouterJson({
     apiKey: process.env.OPENROUTER_API_KEY,
     model,
     prompt,
     schemaName,
-    schema
+    schema,
+    validate
   });
 }
 
@@ -118,19 +119,18 @@ const levelRequirements = {
 };
 
 async function createEdition(level, title, text) {
+  const hasParagraphs = value => Array.isArray(value.paragraphs) && value.paragraphs.every(item => typeof item === 'string' && clean(item));
   const result = await openRouterJson(
     `Create only the ${level} English reading edition from this article. Preserve its facts, claims, examples, and narrative voice. Do not describe the author or say "the writer" or "the article". Do not add facts, headings, notes, or citations.\n\n${levelRequirements[level]}\n\nTitle: ${title}\n\nSource text:\n${text}`,
     `${level}_edition`,
     {
       type: 'object',
-      properties: { paragraphs: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 10 } },
+      properties: { paragraphs: { type: 'array', items: { type: 'string', minLength: 1 }, minItems: 3, maxItems: 10 } },
       required: ['paragraphs'],
       additionalProperties: false
-    }
+    },
+    hasParagraphs
   );
-  if (!Array.isArray(result.paragraphs) || result.paragraphs.some(item => typeof item !== 'string' || !clean(item))) {
-    throw new Error(`OpenRouter response has invalid ${level} content`);
-  }
   const paragraphs = result.paragraphs.map(clean);
   return level === 'easy' ? limitWords(paragraphs, 120) : paragraphs;
 }
