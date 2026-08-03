@@ -103,12 +103,13 @@ async function openRouterJson(prompt, schemaName, schema, validate) {
 
 async function chooseStory(candidates) {
   const list = candidates.map((candidate, index) => `${index}. ${candidate.story.title}\n${candidate.extracted.text.slice(0, 700)}`).join('\n\n');
+  const hasCandidateIndex = value => Number.isInteger(value.index) && value.index >= 0 && value.index < candidates.length;
   const result = await openRouterJson(
     `Choose one article for an English reading site. The goal is to read interesting, thoughtful work by individual authors found on Hacker News. Strongly prefer independent blogs, essays, and first-person writing with a clear personal voice, lived experience, observation, or original argument. Good themes include AI and technology in work, products, culture, learning, philosophy, history, and social life. A distinctive individual perspective is more important than newsworthiness or technical novelty. Reject papers, arXiv, academic research, API docs, SDK/tutorial/reference material, release notes, product announcements, company press, news reporting, and narrowly implementation-focused posts. Return the best candidate index.\n\nCandidates:\n${list}`,
     'daily_hn_selection',
-    { type: 'object', properties: { index: { type: 'integer', minimum: 0, maximum: 7 } }, required: ['index'], additionalProperties: false }
+    { type: 'object', properties: { index: { type: 'integer', minimum: 0, maximum: candidates.length - 1 } }, required: ['index'], additionalProperties: false },
+    hasCandidateIndex
   );
-  if (!Number.isInteger(result.index) || result.index < 0 || result.index >= candidates.length) throw new Error('OpenRouter selected an invalid candidate');
   return candidates[result.index];
 }
 
