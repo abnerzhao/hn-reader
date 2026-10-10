@@ -1,0 +1,36 @@
+---
+title: I Pointed AI at 400 Years of Historical Archives. It Found a Forgotten Meteorite, Lost Rhinos, and Unrecorded Volcanic Eruptions.
+date: 2026-10-10
+source_name: jessewaites.com
+source_url: https://jessewaites.com/blog/post/i-pointed-ai-at-400-years-of-archives/
+---
+
+## easy
+
+A software engineer built an AI system to search millions of old documents from the Dutch East India Company. The AI scanned handwritten records and digitized newspapers for forgotten stories.
+
+It found a meteorite that fell in India in 1812. A newspaper reported it, but no catalogue lists this event. The stone was heavy, iron-rich, and had a black crust.
+
+The AI also found three live rhinoceroses sent from Java to Sri Lanka in the 1730s. All died during the journey or shortly after arrival. These animals were meant as gifts for a king.
+
+Additionally, the system uncovered three volcanic eruptions from the 1700s that are not on official lists.
+
+## medium
+
+I began by asking an AI assistant which open historical questions might be solvable with existing digital data, receiving thirteen candidates ranked by accessibility and potential for verification. Among them were animals in the Dutch East India Company archives, a massive volcanic eruption from 1808 that remained uncatalogued, felt earthquakes in old newspapers, unrecorded meteorite falls, and missing ships. I partnered with Claude Code to build a research pipeline that combined GLOBALISE transcriptions of the company's four-point-three-million-page archive with Dutch national library newspapers and American papers.
+
+The first breakthrough came from a newspaper printed in Batavia in 1812, reprinted in the Java Government Gazette. It contained a letter describing a stone precipitated from a thundercloud near Cokurrgaum, weighing several pounds and coated with a black crust resembling powdered gunpowder. After checking multiple catalogs including the Natural History Museum's collection and international meteorite lists, I confirmed this was a documented meteorite fall in Maharashtra, predating the current earliest record by twenty-six years.
+
+My investigation also uncovered three lost Javan rhinoceroses. In 1738, Dutch workers captured a live rhino intended as a gift to the King of Kandy, but it never reached the destination. Records show both the male and female died during the voyage on the Loverendaal ship in 1740. The company's accounts noted their death, prompting the governor to send additional animals to compensate, though the historical record of these specific shipments remains sparse.
+
+Three previously unrecorded volcanic eruptions emerged from the same search. The 1722 Gamkonora eruption on Java produced widespread ashfall, while the 1712 Ciremai eruption blanketed southeastern regions in bluish ash and destroyed crops. Similarly, the 1780 Slamet eruption in Central Java burned so intensely that locals remembered it as the former burning mountain of Tegal. Each was verified against contemporary letters and cross-referenced with modern databases.
+
+An attempt to locate the mysterious 1808/09 eruption proved unsuccessful after exhaustive searches across American, Dutch, and colonial press archives. Despite the thoroughness of the pipeline, no evidence appeared in the available records. Other curious entries included reports of aerial horsemen off the Dutch coast in 1781 and phantom crowds at Chimney Rock in 1806, though these lacked direct archival confirmation.
+
+## hard
+
+: The spark came from reading Benjamin Breen’s post about using Opus 5.5 to uncover a fresh eyewitness account of the dodo in the Dutch East India Company archives. I am a software engineer who spends much of my time steering AI agents and building agentic workflows, and Breen’s example showed me how the same technique could be turned toward many historical mysteries at once. The idea of adding even a single new datum to a niche field felt like a small but worthwhile contribution, and I wanted to see whether I could reproduce that feeling on my own bench. I switched on my modest home‑AI laboratory and began by asking a Deep Research assistant which open questions were most likely to yield answers from already‑digitised material; it returned thirteen candidates ranked by data completeness, AI usefulness, prior work, and, most crucially, the possibility of verifying any hit against the original page. That last filter is essential because language models can be persuasively wrong, so every claim had to end at a scan of the actual handwritten letter or printed newspaper with an archive reference anyone could inspect.
+
+: I assembled the reading corpus from the GLOBALISE transcriptions of the Company’s 4.35 million pages (spanning the 1600s to the 1790s), the Dutch national library’s digitised newspapers, two centuries of American papers, and a handful of ship logbooks for good measure. At a leisurely two minutes per page, eight hours a day, five days a week, the Company corpus alone would have demanded about seventy years of human reading, not counting the newspapers. My homebrew lab pushed through the entire set in a single twelve‑hour overnight run. Old documents, however, are a nightmare for plain keyword searches: seventeenth‑century Dutch spells “rhinoceros” in roughly fifteen different ways, OCR introduces errors, and handwriting varies wildly. To sidestep this, I converted every passage into a mathematical fingerprint of its meaning—5.7 million vectors drawn from the Company archive alone—so I could query by sense rather than by exact spelling. A first pass went to a tiny, ultra‑fast “System One” model I named Jev, which answers only narrow questions such as “Is this a real animal?” or “Where is it?” at a few cents per million words; running Jev on 59 000 elephant mentions cost me about three dollars. Only the passages Jev flagged moved on to Claude Haiku for close reading, translation, and extraction of dates and places, after which a Claude Code agent opened the scan of the original handwritten page to check the transcription against the source. Before announcing anything new I cross‑checked the result against the specialist catalogues that experts actually use. Throughout I remained the pilot: I chose which leads to pursue, recognised when a trail was going cold, and decided when to stop. The AI supplied scale and speed; I supplied judgement. To guard against false negatives I first required the pipeline to rediscover known events—Breen’s dodo, the Laki eruption of 1783, Tambora in 1815, and a dozen others—just as one would test a metal detector by burying a wristwatch in the yard before sweeping for treasure.
+
+: The first genuine surprise emerged from a newspaper printed in Batavia (today’s Jakarta) in 1812. On 19 December the English‑language Java Government Gazette reprinted a letter from the Bombay Gazette of 26 August. An officer serving with a British force near Pandharpur, in what is now Maharashtra, wrote home: “Captain M— is in possession of a great curiosity viz. a stone precipitated from a Thunder‑cloud near the village of Cokurrgaum three days ago (the 6th August). It weighs I should think four pounds at least, is very heavy for its size, being greatly impregnated with iron, and coated with a thin black crust, as if Gunpowder had exploded around it.” The thunder was heard “
